@@ -1,0 +1,20 @@
+{
+  "name": "shopnest",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Full-stack e-commerce monorepo: React storefront, Express API, shared Zod schemas",
+  "type": "module",
+  "scripts": {
+    "dev": "pnpm -r --parallel dev",
+    "build": "pnpm -r build",
+    "test": "pnpm -r test",
+    "typecheck": "pnpm -r typecheck"
+  },
+  "packageManager": "pnpm@10.33.2",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^26.6.4",
+    "typescript": "^7.0.2",
+    "vitest": "^5.0.3"
+  }
+}
