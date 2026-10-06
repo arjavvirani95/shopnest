@@ -1,6 +1,6 @@
 import type { Product } from "@shopnest/shared";
 
-const img = (slug: string) => `https://picsum.photos/seed/${slug}/600/600`;
+const img = (slug: string) => `/api/images/${slug}.svg`;
 
 const raw: Omit<Product, "id" | "imageUrl">[] = [
   { slug: "linen-throw-blanket", name: "Linen Throw Blanket", description: "Stonewashed linen in oatmeal, 130×170 cm.", priceCents: 6800, category: "home", stock: 14 },

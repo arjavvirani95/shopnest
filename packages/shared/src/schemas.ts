@@ -10,7 +10,7 @@ export const Product = z.object({
   description: z.string(),
   priceCents: Cents,
   category: z.enum(["home", "kitchen", "outdoor", "stationery"]),
-  imageUrl: z.string().url(),
+  imageUrl: z.string(),
   stock: z.number().int().nonnegative(),
 });
 export type Product = z.infer<typeof Product>;

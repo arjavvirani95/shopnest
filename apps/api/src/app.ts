@@ -2,6 +2,7 @@ import cors from "cors";
 import express, { type ErrorRequestHandler, type Request } from "express";
 import { z, ZodError } from "zod";
 import { CartLine, CheckoutRequest, computeTotals, type PricedLine } from "@shopnest/shared";
+import { productSvg } from "./images";
 import { OutOfStockError, Store } from "./store";
 
 class HttpError extends Error {
@@ -38,6 +39,12 @@ export function createApp(store = new Store()) {
     const product = store.getProductBySlug(req.params.slug);
     if (!product) throw new HttpError(404, "Product not found");
     res.json(product);
+  });
+
+  app.get("/api/images/:file", (req, res) => {
+    const product = store.getProductBySlug(req.params.file.replace(/\.svg$/, ""));
+    if (!product) throw new HttpError(404, "Image not found");
+    res.type("image/svg+xml").set("cache-control", "public, max-age=86400").send(productSvg(product));
   });
 
   app.post("/api/cart/quote", (req, res) => {

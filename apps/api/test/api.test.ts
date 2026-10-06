@@ -77,3 +77,20 @@ describe("orders", () => {
     await request(app).post("/api/orders").set("content-type", "application/json").send("{bad").expect(400);
   });
 });
+
+describe("images", () => {
+  it("serves an SVG tile per product", async () => {
+    const res = await request(app)
+      .get("/api/images/brass-pen.svg")
+      .buffer(true)
+      .parse((r, cb) => {
+        let data = "";
+        r.on("data", (c: Buffer) => (data += c));
+        r.on("end", () => cb(null, data));
+      })
+      .expect(200);
+    expect(res.headers["content-type"]).toContain("image/svg+xml");
+    expect(res.body).toContain("Brass Pen");
+    await request(app).get("/api/images/nope.svg").expect(404);
+  });
+});
